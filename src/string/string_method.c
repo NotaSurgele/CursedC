@@ -9,6 +9,7 @@ void init_str(string_t *this, char *str)
     if (this->str) free(this->str);
     this->str = NULL;
     this->str = strdup(str);
+    this->str[strlen(str)] = '\0';
 }
 
 int get_str_size(string_t *this)
@@ -32,11 +33,13 @@ void Destroy(string_t *this)
 void Cat(string_t *this, char *__to_cat)
 {
     if (!this->str || !__to_cat) return;
-    this->str = strdup(strcat(this->str, __to_cat));
+    this->str = realloc(this->str, (strlen(this->str) + strlen(__to_cat) + 1));
+    this->str = strcat(this->str, __to_cat);
 }
 
 void Create_string(string_t *this)
 {
+    this->str = NULL;
     this->New = &init_str;
     this->Length = &get_str_size;
     this->Show = &print;
