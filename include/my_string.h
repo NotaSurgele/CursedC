@@ -9,6 +9,7 @@
 #define STRING_H_
 
     #include "my_string.h"
+    #include <stdbool.h>
 
     typedef struct string_h {
         char *str;
@@ -17,8 +18,11 @@
         void (*Show)(struct string_h *);
         void (*Destroy)(struct string_h *);
         void (*toConcat)(struct string_h *, char *__to_cat);
+        bool (*isUpper)(struct string_h *);
+        bool (*isLower)(struct string_h *);
+        bool (*isPrintable)(struct string_h *);
     }string_t;
 
-    void Create_string(string_t *this);
+    void string_constructor(string_t *this);
     int get_str_size(string_t *this);
 #endif /* !STRING_H_ */

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 void init_str(string_t *this, char *str)
 {
@@ -9,7 +10,6 @@ void init_str(string_t *this, char *str)
     if (this->str) free(this->str);
     this->str = NULL;
     this->str = strdup(str);
-    this->str[strlen(str)] = '\0';
 }
 
 int get_str_size(string_t *this)
@@ -37,7 +37,40 @@ void Cat(string_t *this, char *__to_cat)
     this->str = strcat(this->str, __to_cat);
 }
 
-void Create_string(string_t *this)
+bool isUpper(string_t *this)
+{
+    if (!this->str) return false;
+
+    for (int each = 0; this->str[each] != '\0'; each++) {
+        if (this->str[each] < 'A' || this->str[each] > 'Z')
+            return false;
+    }
+    return true;
+}
+
+bool isLower(string_t *this)
+{
+    if (!this->str) return false;
+
+    for (int each = 0; this->str[each] != '\0'; each++) {
+        if (this->str[each] < 'a' || this->str[each] > 'z')
+            return false;
+    }
+    return true;
+}
+
+bool isPrintable(string_t *this)
+{
+    if (!this->str) return false;
+
+    for (int each = 0; this->str[each]; each++) {
+        if (this->str[each] < 27 || this->str[each] > 126)
+            return false;
+    }
+    return true;
+}
+
+void string_constructor(string_t *this)
 {
     this->str = NULL;
     this->New = &init_str;
@@ -45,4 +78,7 @@ void Create_string(string_t *this)
     this->Show = &print;
     this->Destroy = &Destroy;
     this->toConcat = &Cat;
+    this->isUpper = &isUpper;
+    this->isLower = &isLower;
+    this->isPrintable = &isPrintable;
 }
