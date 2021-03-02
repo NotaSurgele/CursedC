@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2021
-** class_implementing
-** File description:
-** method
-*/
-
 #include "my_string.h"
 #include <string.h>
 #include <stdlib.h>
