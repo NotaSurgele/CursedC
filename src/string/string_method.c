@@ -70,6 +70,17 @@ bool isPrintable(string_t *this)
     return true;
 }
 
+bool isNum(string_t *this)
+{
+    if (!this->str) return false;
+
+    for (int each = 0; this->str[each]; each++) {
+        if (this->str[each] < '0' || this->str[each] > '9')
+            return false;
+    }
+    return true;
+}
+
 void string_constructor(string_t *this)
 {
     this->str = NULL;
@@ -81,4 +92,5 @@ void string_constructor(string_t *this)
     this->isUpper = &isUpper;
     this->isLower = &isLower;
     this->isPrintable = &isPrintable;
+    this->isNum = &isNum;
 }

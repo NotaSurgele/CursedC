@@ -21,6 +21,7 @@
         bool (*isUpper)(struct string_h *);
         bool (*isLower)(struct string_h *);
         bool (*isPrintable)(struct string_h *);
+        bool (*isNum)(struct string_h *);
     }string_t;
 
     void string_constructor(string_t *this);
